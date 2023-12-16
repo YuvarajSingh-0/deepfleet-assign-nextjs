@@ -106,8 +106,8 @@ export default function Billing() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((product) => (
-                <tr key={product.id}>
+              {cart.map((product,i) => (
+                <tr key={i}>
                   <td className="border px-4 py-2">{product.product}</td>
                   <td className="border px-4 py-2">{product.category}</td>
                   <td className="border px-4 py-2">{product.quantity}</td>
@@ -132,8 +132,8 @@ export default function Billing() {
               </tr>
             </thead>
             <tbody>
-              {billedProducts.map((product) => (
-                <tr key={product.id}>
+              {billedProducts.map((product,i) => (
+                <tr key={i}>
                   <td className="border px-4 py-2">{product.product}</td>
                   <td className="border px-4 py-2">{product.category}</td>
                   <td className="border px-4 py-2">{product.quantity}</td>
