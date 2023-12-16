@@ -46,29 +46,19 @@ export default function AddCategories() {
         })
     }
     return (
-        <div>
-            <h1>add products</h1>
-            <table>
-                <tr>
-                    <td><label htmlFor="productName">product name</label></td>
-                    <td><input ref={productNameRef} type="text" name="productName" id="productName" placeholder="product name" /></td>
-                </tr>
-                <tr>
-                    <td><label htmlFor="productRate">Product Price</label></td>
-                    <td><input ref={productRateRef} type="number" name="productRate" id="productRate" placeholder="product Price" /></td>
-                </tr>
-                <tr>
-                    <td><label htmlFor="productCategory">Product Category</label></td>
-                    <td>
-                        <select name="category" ref={productCategoryRef} id="category">
-                            {categories?.map((category) => <option value={category}>{category}</option>)}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <button onClick={handleAddProduct}>Add product</button>
-                </tr>
-            </table>
+        <div className='mt-32 flex flex-col w-full justify-center items-center align-middle'>
+            <h1 className='text-5xl font-semibold mb-5'>Add Products</h1>
+            <div className='flex flex-col gap-5 justify-center items-center align-middle'>
+
+            <input ref={productNameRef} type="text" name="productName" id="productName" placeholder="Product Name" className='p-3 outline-[#8780ef] w-max bg-[#f3f3f9] rounded-md' />
+            <input ref={productRateRef} type="number" name="productRate" id="productRate" placeholder="Product Price" className='p-3 outline-[#8780ef] w-max bg-[#f3f3f9] rounded-md' />
+            <select name="category" ref={productCategoryRef} id="category" className='p-3 w-full outline-[#8780ef] bg-[#f3f3f9] rounded-md'>
+                {categories?.map((category) => <option value={category} key={category}>{category}</option>)}
+            </select>
+            <button className='bg-[#6660b5] text-white hover:drop-shadow-2xl w-max outline-[#8780ef] transition-all ease-in-out px-4 py-3 rounded-md' onClick={handleAddProduct}>
+                Add Product
+            </button>
+            </div>
         </div>
     )
 }
