@@ -68,8 +68,15 @@ export default function Billing() {
   function handleAddToCart() {
     // Your function implementation
     console.log(selectedProduct)
+    console.log(selectedProduct)
+    let cartProduct = cart.find(product => product.product == selectedProduct);
+    if (cartProduct) {
+      cartProduct.quantity += Number(quantity);
+      setCart([...cart]);
+      return;
+    }
     let product = products.find(product => product.product == selectedProduct);
-    product.quantity = quantity;
+    product.quantity = Number(quantity);
     setCart([...cart, product]);
 
   }
@@ -83,11 +90,12 @@ export default function Billing() {
         <h1 className='text-5xl mb-5 font-semibold leading-relaxed'>Billing</h1>
         <div className='flex gap-10'>
           <select className='p-3 bg-[#f3f3f9] rounded-md' name="category" defaultValue={selectedCategory} onChange={handleCategoryChange} id="categorySelect">
-            {categories?.map((category,i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={category}>{category}</option>)}
+            {categories?.map((category, i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={category}>{category}</option>)}
           </select>
+          {products.length == 0 ? <Link href='/addProducts' className=' self-center underline text-center text-[#8f57ea]'>Add Some Products First</Link>: 
           <select className='p-3 bg-[#f3f3f9] rounded-md' name="product" defaultValue={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)} id="productSelect">
-            {products?.map((product,i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={product.product}>{product.product}</option>)}
-          </select>
+            {products?.map((product, i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={product.product}>{product.product}</option>)}
+          </select>}
           <input className='p-3 bg-[#f3f3f9] rounded-md' type="number" value={quantity} name="quantity" id="quantity" placeholder="Quantity" onChange={(e) => setQuantity(e.target.value)} />
           <button className='bg-[#6660b5] text-white hover:drop-shadow-2xl transition-all ease-in-out px-5 py-3 rounded-md' onClick={handleAddToCart} id="addButton">Add</button>
         </div>
@@ -106,7 +114,7 @@ export default function Billing() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((product,i) => (
+              {cart.map((product, i) => (
                 <tr key={i}>
                   <td className="border px-4 py-2">{product.product}</td>
                   <td className="border px-4 py-2">{product.category}</td>
@@ -132,7 +140,7 @@ export default function Billing() {
               </tr>
             </thead>
             <tbody>
-              {billedProducts.map((product,i) => (
+              {billedProducts.map((product, i) => (
                 <tr key={i}>
                   <td className="border px-4 py-2">{product.product}</td>
                   <td className="border px-4 py-2">{product.category}</td>
