@@ -83,10 +83,10 @@ export default function Billing() {
         <h1 className='text-5xl mb-5 font-semibold leading-relaxed'>Billing</h1>
         <div className='flex gap-10'>
           <select className='p-3 bg-[#f3f3f9] rounded-md' name="category" defaultValue={selectedCategory} onChange={handleCategoryChange} id="categorySelect">
-            {categories?.map((category) => <option className='p-3 bg-[#f3f3f9] rounded-md' value={category}>{category}</option>)}
+            {categories?.map((category,i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={category}>{category}</option>)}
           </select>
           <select className='p-3 bg-[#f3f3f9] rounded-md' name="product" defaultValue={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)} id="productSelect">
-            {products?.map(product => <option className='p-3 bg-[#f3f3f9] rounded-md' value={product.product}>{product.product}</option>)}
+            {products?.map((product,i) => <option key={i} className='p-3 bg-[#f3f3f9] rounded-md' value={product.product}>{product.product}</option>)}
           </select>
           <input className='p-3 bg-[#f3f3f9] rounded-md' type="number" value={quantity} name="quantity" id="quantity" placeholder="Quantity" onChange={(e) => setQuantity(e.target.value)} />
           <button className='bg-[#6660b5] text-white hover:drop-shadow-2xl transition-all ease-in-out px-5 py-3 rounded-md' onClick={handleAddToCart} id="addButton">Add</button>
