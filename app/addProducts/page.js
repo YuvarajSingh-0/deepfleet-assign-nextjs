@@ -5,29 +5,39 @@ export default function AddCategories() {
     const productRateRef = useRef();
     const productCategoryRef = useRef();
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]); // categories available in database to select which catgory the product belongs to while creating product
+
+    // Filling up the categories in select tag(dropdown menu) available in database
     useEffect(() => {
         fetch('/api/categories')
             .then(response => response.json())
             .then(data => setCategories(data));
     }, []);
 
+    // handling the addition of product to database
     function handleAddProduct() {
         let productName = productNameRef.current.value;
         let productRate = productRateRef.current.value;
         let productCategory = productCategoryRef.current.value;
+
+        // if product name is empty, alert the user
         if (productName == "") {
             alert("Product Name is required");
             return;
         }
+
+        // if product rate is empty, alert the user
         if (productRate == "") {
             alert("Product Rate is required");
             return;
         }
+        // if product category is empty, alert the user
         if (productCategory == "") {
             alert("Product Category is required");
             return;
         }
+
+        // post the product details to backend
         fetch('/api/products', {
             method: 'POST',
             headers: {
@@ -42,6 +52,8 @@ export default function AddCategories() {
                     return;
                 }
                 alert("Product added successfully");
+
+                // clearing the input fields
                 productNameRef.current.value = "";
                 productRateRef.current.value = "";
             })

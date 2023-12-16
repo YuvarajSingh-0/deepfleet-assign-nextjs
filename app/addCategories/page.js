@@ -3,17 +3,25 @@ import { useRef } from "react";
 export default function AddCategories() {
     const categoryNameRef = useRef();
     const gstRef = useRef();
+
+    // handling the addition of category to database
     function handleAddCategory() {
         let categoryName = categoryNameRef.current.value;
         let gst = gstRef.current.value;
+
+        // if category name is empty, alert the user
         if (categoryName == "") {
             alert("Category Name is required");
             return;
         }
+
+        // if gst is empty, alert the user
         if (gst == "") {
             alert("GST is required");
             return;
         }
+
+        // post the category details to backend
         fetch('/api/categories', {
             method: 'POST',
             headers: {
@@ -34,10 +42,8 @@ export default function AddCategories() {
     }
     return (
         <div className='mt-32 flex flex-col w-full justify-center items-center align-middle'>
-
             <h1 className='text-5xl font-semibold mb-5'>Add Category</h1>
             <div className='flex flex-col gap-5 justify-center items-center align-middle'>
-
                 <input className='p-3 outline-[#8780ef] w-max bg-[#f3f3f9] rounded-md' ref={categoryNameRef} type="text" name="categoryName" id="categoryName" placeholder="Category Name" />
                 <input className='p-3 outline-[#8780ef] w-max bg-[#f3f3f9] rounded-md' ref={gstRef} type="number" name="categoryGst" id="categoryGst" placeholder="Category GST" />
                 <button className='bg-[#6660b5] text-white hover:drop-shadow-2xl w-max outline-[#8780ef] transition-all ease-in-out px-4 py-3 rounded-md' onClick={handleAddCategory}>Add Category</button>
